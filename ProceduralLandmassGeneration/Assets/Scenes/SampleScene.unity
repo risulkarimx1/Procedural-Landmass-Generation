@@ -385,11 +385,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapWidth: 100
   mapHeight: 100
-  noiseScale: 11
+  noiseScale: 18
   ocataves: 4
-  persistance: 5
-  lacunarity: 5
+  persistance: 0.519
+  lacunarity: 3.8
   autoUpdate: 1
+  seed: 45
+  offset: {x: 11.62, y: 3.96}
+  Regions:
+  - name: Water
+    height: 0.4
+    color: {r: 0.054957304, g: 0.64498436, b: 0.8962264, a: 0}
+  - name: Land
+    height: 1
+    color: {r: 0.21933962, g: 0.8773585, b: 0.6566206, a: 0}
 --- !u!4 &2058550905
 Transform:
   m_ObjectHideFlags: 0
