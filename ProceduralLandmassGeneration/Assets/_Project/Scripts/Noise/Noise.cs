@@ -2,11 +2,25 @@
 
 public static class Noise
 {
-    public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, float scale,int octave,float persistance,float lacunarity)
+    public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale,int octaves,float persistance,float lacunarity,Vector2 offset)
     {
         float[,] noiseMap = new float[mapHeight,mapHeight];
+
+        System.Random prng = new System.Random(seed);
+
+        var octaveOffsets = new Vector2[octaves];
+
+        for (int i = 0; i < octaves; i++)
+        {
+            octaveOffsets[i] =new Vector2(prng.Next(-100000, 100000) + offset.x, prng.Next(-100000, 100000) + offset.y);
+        }
+
         if (scale <= 0)
             scale = .0001f;
+
+        float halfWidth = mapWidth / 2;
+        float halfHeight = mapHeight / 2;
+
         float maxNoiseHeight = float.MinValue;
         float minNoiseHeight = float.MaxValue;
 
@@ -17,10 +31,10 @@ public static class Noise
                 float amplitude = 1;
                 float frequency = 1;
                 float noiseHeight = 0;
-                for (int i = 0; i < octave; i++)
+                for (int i = 0; i < octaves; i++)
                 {
-                    var sampleX = x / scale *frequency;
-                    var sampleY = y / scale * frequency;
+                    var sampleX = (x-halfWidth) / scale *frequency+octaveOffsets[i].x;
+                    var sampleY = (y-halfHeight) / scale * frequency + octaveOffsets[i].y;
                     var perlinValue = Mathf.PerlinNoise(sampleX, sampleY)*2 -1;
                     noiseHeight += perlinValue * amplitude;
                     amplitude *= persistance;
