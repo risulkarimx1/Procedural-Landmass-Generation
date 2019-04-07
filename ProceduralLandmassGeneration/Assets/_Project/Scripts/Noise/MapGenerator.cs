@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    // made changes in param
     public enum  DrawMode
     {
         NoiseMode,ColorMap
